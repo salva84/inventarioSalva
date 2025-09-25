@@ -42,7 +42,12 @@ define('FORM',4);
 define('MAXGENRELENGTH',20);
 define('MINGENRELENGTH',3);
 
-$connectionData = ["host"=>"localhost","dbUser"=>"root","dbPassword"=>"root","db"=>"inventory_new"];
+$connectionData = [
+    "host" => getenv('DB_HOST') ?: "localhost",
+    "dbUser" => getenv('DB_USER') ?: "root", 
+    "dbPassword" => getenv('DB_PASSWORD') ?: "root",
+    "db" => getenv('DB_NAME') ?: "inventory_new"
+];
 $forms = [CONSOLES =>["formconsole.php","consola"],
     VIDEOGAMES =>["formvideogame.php","videojuego"]
 ];

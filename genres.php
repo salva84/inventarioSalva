@@ -105,7 +105,7 @@ require_once "profile.php";
                                                     </span>
                                                     <span class="mx-2 py-1 w-36"><?php echo $row['genre']; ?></span>
                                                     <span class="mx-4 py-1 [&>a]:w-8"
-                                                    ><a href="http://localhost/inventario/dist/genres.php?delete=<?php echo $row['id'] ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="text-red-600 hover:text-indigo-900" id="delete" alt="borrar" title="borrar">X</a>        
+                                                    ><a href="./genres.php?delete=<?php echo $row['id'] ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="text-red-600 hover:text-indigo-900" id="delete" alt="borrar" title="borrar">X</a>        
                                                     </span>                                            
                                                 </li>
                                             <?php } 

@@ -5,6 +5,6 @@ if (!empty($profile)) {
 }
 else {
     // Redirigir al usuario al listado de consolas
-    header('Location: http://localhost/inventario/dist/error.php');
+    header('Location: ./error.php');
     exit(); // Es importante llamar a exit después de una redirección
 }

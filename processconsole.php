@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['consolename']) && isset($_SESSION['user'])) {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: http://localhost/inventario/dist/error.php');
+        header('Location: ./error.php');
         exit();
     }
     $consoleName = filtering($_POST['consolename']);
@@ -37,7 +37,7 @@ if (isset($_POST['consolename']) && isset($_SESSION['user'])) {
             updateConsoleData($connection, $consoleName, $maker, $price, $result, $comment, $dateAdquisition, $consoleId, $_POST['oldimage'], $id);
         }
         // Redirigir al usuario al registro
-        header('Location: http://localhost/inventario/dist/consoles.php');
+        header('Location: ./consoles.php');
         exit(); // Es importante llamar a exit después de una redirección        
     }
 }

@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['delete']) && isset($_SESSION['user'])) {
     if (!isset($_GET['csrf_token']) || $_GET['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: http://localhost/inventario/dist/error.php');
+        header('Location: ./error.php');
         exit();
     }
     $connection = createConnection($connectionData);
@@ -13,6 +13,6 @@ if (isset($_GET['delete']) && isset($_SESSION['user'])) {
         deleteVideogame($connection, $videogameId, $ownerId);
     }
     // Redirigir al usuario al listado de videojuegos
-    header('Location: http://localhost/inventario/dist/videogames.php');
+    header('Location: ./videogames.php');
     exit(); // Es importante llamar a exit después de una redirección    
 }

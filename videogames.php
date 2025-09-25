@@ -182,14 +182,14 @@ require_once "profile.php";
                                                     <?php echo date('d-m-Y',strtotime($row['dateadquisition']));?></td>
                                                 <td
                                                     class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                    <a href="http://localhost/inventario/dist/viewvideogame.php?videogame=<?php echo $row['id']; ?>" class="text-indigo-600 hover:text-indigo-900">Ver</a>  
+                                                    <a href="./viewvideogame.php?videogame=<?php echo $row['id']; ?>" class="text-indigo-600 hover:text-indigo-900">Ver</a>  
         
                                                 <td
                                                     class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                    <a href="http://localhost/inventario/dist/formvideogame.php?videogame=<?php echo $row['id']; ?>" class="text-indigo-600 hover:text-indigo-900">Editar</a></td>
+                                                    <a href="./formvideogame.php?videogame=<?php echo $row['id']; ?>" class="text-indigo-600 hover:text-indigo-900">Editar</a></td>
                                                 <td
                                                     class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                    <a href="http://localhost/inventario/dist/videogames.php?delete=<?php echo $row['id']; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="text-red-600 hover:text-indigo-900" id="delete">Borrar</a></td>                                                    
+                                                    <a href="./videogames.php?delete=<?php echo $row['id']; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="text-red-600 hover:text-indigo-900" id="delete">Borrar</a></td>                                                    
                                             </tr>
                                             <?php } 
                                             ?>

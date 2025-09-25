@@ -1,11 +1,13 @@
 <?php
+session_start(); // Iniciar sesión antes que cualquier output
+ob_start(); // Iniciar buffer de salida para evitar problemas con headers
 require_once "opts.php";
 require_once "helpers.php";
 require_once "database.php";
 require_once "session.php";
 if (isset($_POST['sent'])) {
   if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-    header('Location: http://localhost/inventario/dist/error.php');
+    header('Location: ./error.php');
     exit();
   }
   $username = filtering($_POST['username']);
@@ -22,11 +24,18 @@ if (isset($_POST['sent'])) {
   }
   $result = checkPassword($password);
   if (isset($passwordErrors[$result])) $messages['password'] = $passwordErrors[$result];
-  $messages["repassword"] = checkRepassword($password, $repassword);
+  $result = checkRepassword($password, $repassword);
   if (isset($repasswordErrors[$result])) $messages['repassword'] = $repasswordErrors[$result];
   if (empty($messages['username']) && empty($messages['password']) && empty($messages['repassword'])) {
     $result = uploadFile(PORTRAITSDIR);
-    if (is_int($result) && isset($imageErrors[$result])) $messages["image"] = $imageErrors[$result];
+    if (is_int($result) && isset($imageErrors[$result])) {
+      $messages["image"] = $imageErrors[$result];
+    } else {
+      // Si no hay error, usar una imagen por defecto si no se subió ninguna
+      if ($result === FILERROR) {
+        $result = 'default.jpg'; // Imagen por defecto
+      }
+    }
   }
   else {
     $messages['image'] = $imageErrors[IMAGEERROR];
@@ -37,7 +46,7 @@ if (isset($_POST['sent'])) {
     setUser($connection, $username, $hash, $result);
     $connection->close();
     // Redirigir al usuario al login
-    header('Location: http://localhost/inventario/dist/index.php');
+    header('Location: ./index.php');
     exit(); // Es importante llamar a exit después de una redirección    
   } 
 }

@@ -1,7 +1,7 @@
 <?php  
 if (isset($_POST['genre']) && isset($_SESSION['user'])) {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: http://localhost/inventario/dist/error.php');
+        header('Location: ./error.php');
         exit();
     }
     $messages = ['genre' => null, 'image' => null];
@@ -32,7 +32,7 @@ if (isset($_POST['genre']) && isset($_SESSION['user'])) {
             setGenre($connection, $genre, $uploadResult);
         } 
         // Redirigir al usuario al registro
-        header('Location: http://localhost/inventario/dist/genres.php');
+        header('Location: ./genres.php');
         exit(); // Es importante llamar a exit después de una redirección        
     }
 }

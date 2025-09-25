@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['videogamename']) && isset($_SESSION['user'])) {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: http://localhost/inventario/dist/error.php');
+        header('Location: ./error.php');
         exit();
     }
     $videogameName = filtering($_POST['videogamename']);
@@ -42,7 +42,7 @@ if (isset($_POST['videogamename']) && isset($_SESSION['user'])) {
             updateVideogame($connection, $videogameName, $consoleId, $genreId, $result, $comment, $price, $dateAdquisition, $videogameId, $_POST['oldimage'], $id);
         }
         // Redirigir al usuario al listado
-        header('Location: http://localhost/inventario/dist/videogames.php');
+        header('Location: ./videogames.php');
         exit(); // Es importante llamar a exit después de una redirección        
     }
 }

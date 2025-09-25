@@ -35,7 +35,7 @@ require_once "opts.php";
     </span>
     <script type="application/javascript">
         document.getElementById("volver").addEventListener("click", function() {
-            window.location.href = 'http://localhost/inventario/dist/consoles.php';
+            window.location.href = './consoles.php';
         });
     </script>      
 </body>

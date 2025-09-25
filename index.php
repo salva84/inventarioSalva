@@ -1,4 +1,6 @@
 <?php
+session_start(); // Iniciar sesión antes que cualquier output
+ob_start(); // Iniciar buffer de salida para evitar problemas con headers
 require_once "opts.php";
 require_once "helpers.php";
 require_once "database.php";
@@ -21,12 +23,12 @@ if (isset($_POST['sent'])) {
     $id = getId($connection, $username);
     $_SESSION['user'] = base64_encode($id);
     // Redirigir al usuario al listado de consolas
-    header('Location: http://localhost/inventario/dist/consoles.php');
+    header('Location: ./consoles.php');
     exit(); // Es importante llamar a exit después de una redirección
   }
   else {
     // Redirigir al usuario al listado de consolas
-    header('Location: http://localhost/inventario/dist/index.php?error=1');
+    header('Location: ./index.php?error=1');
     exit(); // Es importante llamar a exit después de una redirección
   }
 }
@@ -64,7 +66,7 @@ if (isset($_POST['sent'])) {
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
             Login
           </button>
-          <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="http://localhost/inventario/dist/register.php">
+          <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="./register.php">
             Registro
           </a>          
         </div>

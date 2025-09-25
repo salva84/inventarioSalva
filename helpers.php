@@ -78,6 +78,9 @@ function encryptPassword($password) {
     return password_hash($password, PASSWORD_DEFAULT);
 }
 function checkHash($password, $pwd_hashed) {
+    if (empty($pwd_hashed)) {
+        return false;
+    }
     return password_verify($password, $pwd_hashed);
 }
 function moveImage($arrayFile, $tmpName, $uploadDir) {
@@ -94,6 +97,12 @@ function moveImage($arrayFile, $tmpName, $uploadDir) {
 function checkImage($fileName, $fileSize, $tmpName, $uploadDir) {
     $max_file_size = "1572864";
     $validExtensions = IMAGEEXTENSIONS;    
+    
+    // Verificar que el archivo temporal existe y no está vacío
+    if (empty($tmpName) || !file_exists($tmpName) || $fileSize === 0) {
+        return FILERROR;
+    }
+    
     $arrayFile = pathinfo($fileName);
     $extension = $arrayFile['extension'];
     // Comprobamos la extensión del archivo
@@ -104,17 +113,30 @@ function checkImage($fileName, $fileSize, $tmpName, $uploadDir) {
     if($fileSize > $max_file_size){
         return WEIGHTERROR  ;
     }
-    list($width, $height, $type, $attr) = getimagesize($tmpName);
+    
+    // Verificar que getimagesize puede procesar el archivo
+    $imageInfo = getimagesize($tmpName);
+    if ($imageInfo === false) {
+        return FILERROR;
+    }
+    
+    list($width, $height, $type, $attr) = $imageInfo;
     if ($width > MAXWIDTHPX || $height > MAXHEIGTHPX) {
         return PXSIZEERROR;
     }
     return moveImage($arrayFile, $tmpName, $uploadDir);
 }
 function uploadFile($uploadDir) {
-    if (!empty($_FILES['image']['name'])) {
+    if (!empty($_FILES['image']['name']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $fileName = $_FILES['image']['name'];
         $fileSize = $_FILES['image']['size'];
         $tmpName = $_FILES['image']['tmp_name'];
+        
+        // Verificar que el archivo temporal existe y no está vacío
+        if (empty($tmpName) || !file_exists($tmpName)) {
+            return FILERROR;
+        }
+        
         return checkImage($fileName, $fileSize, $tmpName, $uploadDir);
     } else {
         return FILERROR;

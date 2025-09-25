@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['delete']) && isset($_SESSION['user'])) {
     if (!isset($_GET['csrf_token']) || $_GET['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: http://localhost/inventario/dist/error.php');
+        header('Location: ./error.php');
         exit();
     }
     $connection = createConnection($connectionData);
@@ -13,6 +13,6 @@ if (isset($_GET['delete']) && isset($_SESSION['user'])) {
         deleteGenre($connection, $genreId);
     }
     // Redirigir al usuario al listado de consolas
-    header('Location: http://localhost/inventario/dist/genres.php');
+    header('Location: ./genres.php');
     exit(); // Es importante llamar a exit después de una redirección    
 }
