@@ -39,7 +39,7 @@ function setConsole($connection, $consoleName, $maker, $price, $image, $comment,
 }
 
 function setVideogame($connection, $videogamename, $consoleId, $genreId, $image, $comment, $price, $dateAdquisition, $ownerId) {
-    $sql = "INSERT INTO videogames (videogamename, consoleid, genreid, image, comment, price, dateadquisition, ownerid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO videogames (videogamename, consoleid, genreid, image, comment, price, dateadquisition, ownerid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     executeInsert($connection, $sql, [$videogamename, $consoleId, $genreId, $image, $comment, $price, $dateAdquisition, $ownerId]);
 }
 
@@ -49,7 +49,7 @@ function setGenre($connection, $genre, $image) {
 }
 
 function updateConsoleData($connection, $consoleName, $maker, $price, $image, $comment, $dateAdquisition, $id, $oldImage, $ownerId) {    
-    $sql = "UPDATE consoles SET consolename=?, maker=?, price=?, image=?, comment=?, dateadquisition=? WHERE id = ? ANd ownerid = ?";
+    $sql = "UPDATE consoles SET consolename=?, maker=?, price=?, image=?, comment=?, dateadquisition=? WHERE id = ? AND ownerid = ?";
     executeUpdate($connection, $sql, [$consoleName, $maker, $price, $image, $comment, $dateAdquisition, $id, $ownerId]);
     deleteImage(CONSOLESDIR.$oldImage);
 }
