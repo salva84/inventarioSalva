@@ -11,9 +11,9 @@ require_once "profile.php";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="./css/output.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+<body style="background: #edf2f7;">
     <div class="w-full">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <?php      
@@ -43,8 +43,8 @@ require_once "profile.php";
                 $_SESSION['nosearch'] = 1;
                 include_once "header.php"; ?>
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-                    <div class="container px-6 py-8 mx-auto">
-                        <h3 class="text-3xl font-medium text-gray-700">Géneros</h3>
+                    <div class="container py-4">
+                        <h3 class="h3 text-secondary">Géneros</h3>
         
                         <div class="mt-4">
                             <div class="flex flex-wrap -mx-6">
@@ -92,39 +92,35 @@ require_once "profile.php";
                             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                                 <div
                                     class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                                    <ul
-                                        id="infinte-scroll"
-                                        data-te-infinite-scroll-init
-                                        class="h-[261px] w-80 overflow-y-scroll p-1">
+                                    <ul id="infinte-scroll" class="list-group" style="max-height:260px; width:320px; overflow-y:auto;">
                                             <?php while ($row = $resultsGenres->fetch_assoc()) {?>
-                                                <li class="mr-2 flex items-center border dark:border-neutral-600">
-                                                    <span class="mx-2 py-1 [&>img]:w-10"
-                                                    >                                                            <img class="w-10 h-10 rounded-full"
+                                                <li class="list-group-item d-flex align-items-center">
+                                                    <span class="me-2 py-1">
+                                                            <img class="rounded-circle" style="width:40px;height:40px;object-fit:cover;"
                                                                 src="getimages.php?image=<?php echo $row['image'];?>&type=<?php echo GENRES;?>"
                                                                 alt="<?php echo $row['genre'];?>" title="<?php echo $row['genre'];?>">
                                                     </span>
-                                                    <span class="mx-2 py-1 w-36"><?php echo $row['genre']; ?></span>
-                                                    <span class="mx-4 py-1 [&>a]:w-8"
-                                                    ><a href="./genres.php?delete=<?php echo $row['id'] ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="text-red-600 hover:text-indigo-900" id="delete" alt="borrar" title="borrar">X</a>        
-                                                    </span>                                            
+                                                    <span class="me-auto py-1"><?php echo $row['genre']; ?></span>
+                                                    <span class="ms-3 py-1"><a href="./genres.php?delete=<?php echo $row['id'] ?>&csrf_token=<?php echo $_SESSION['csrf_token']; }?>" class="link-danger" id="delete" alt="borrar" title="borrar">Eliminar</a></span>                                            
                                                 </li>
                                             <?php } 
                                             ?>
                                     </ul>
                                     <div class="pt-1">
-                                        <form class="w-full p-1" action="<?php echo $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data" method="POST">
+                                        <form class="w-100 p-1" action="<?php echo $_SERVER['PHP_SELF'];?>" enctype="multipart/form-data" method="POST">
                                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                                            <div class="flex flex-row items-center w-full lg:w-1/2 px-3 mb-6 md:mb-0">
-                                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="genre">
-                                                Género
-                                            </label>
-                                            <input class="appearance-none block mx-2 w-54 bg-gray-200 text-gray-700 border <?php if (!empty($messages["genre"])) { echo "border-red-500"; } else { echo "border-gray-300 focus:border-gray-500"; }; ?> rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="genre" name="genre" value="<?php echo isset($_POST['genre']) ? htmlspecialchars($_POST['genre']) : (isset($row['genre']) ? $row['genre'] : "");?>" type="text" placeholder="Estrategia">
-                                            <p class="text-red-500 text-xs italic"><?php echo $messages['genre'] ?></p>
-                                            <?php include_once "imageinput.php" ?>
-                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                                            Añadir
-                                            </button>       
-                                           
+                                            <div class="row g-2 align-items-end">
+                                              <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                                                <label class="form-label" for="genre">Género</label>
+                                                <input class="form-control <?php if (!empty($messages['genre'])) echo 'is-invalid'; ?>" id="genre" name="genre" value="<?php echo isset($_POST['genre']) ? htmlspecialchars($_POST['genre']) : (isset($row['genre']) ? $row['genre'] : "");?>" type="text" placeholder="Estrategia">
+                                                <div class="invalid-feedback"><?php echo $messages['genre'] ?></div>
+                                              </div>
+                                              <div class="col-12 col-sm-6 col-md-5 col-lg-4">
+                                                <?php include_once "imageinput.php" ?>
+                                              </div>
+                                              <div class="col-12 col-md-2">
+                                                <button class="btn btn-primary w-100" type="submit">Añadir</button>
+                                              </div>
                                             </div>                       
                                         </form>
                                     </div>
@@ -138,5 +134,6 @@ require_once "profile.php";
         </div>
     </div>
     <script type="application/javascript" src="./js/delete.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

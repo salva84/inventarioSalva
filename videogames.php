@@ -11,9 +11,9 @@ require_once "profile.php";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="./css/output.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+<body style="background: #edf2f7;">
     <div class="w-full">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <?php 
@@ -44,8 +44,8 @@ require_once "profile.php";
                 $_SESSION['nosearch'] = 1;
                 include_once "header.php"; ?>
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-                    <div class="container px-6 py-8 mx-auto">
-                        <h3 class="text-3xl font-medium text-gray-700">Inventario</h3>
+                    <div class="container py-4">
+                        <h3 class="h3 text-secondary">Inventario</h3>
         
                         <div class="mt-4">
                             <div class="flex flex-wrap -mx-6">
@@ -136,60 +136,48 @@ require_once "profile.php";
                             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                                 <div
                                     class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                                    <table class="min-w-full">
+                                    <table class="table table-hover align-middle">
                                         <thead>
                                             <tr>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Nombre</th>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Precio</th>
-                                                <th
-                                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                                    Fecha Adquisición</th>
-                                                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
-                                                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
-                                                <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
+                                                <th>Nombre</th>
+                                                <th>Precio</th>
+                                                <th>Fecha Adquisición</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                         </thead>
         
                                         <tbody class="bg-white">
                                             <?php while ($row = $resultsVideogames->fetch_assoc()) {?>
                                             <tr>
-                                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                                    <div class="flex items-center">
-                                                        <div class="flex-shrink-0 w-10 h-10">
-                                                            <img class="w-10 h-10 rounded-full"
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-shrink-0">
+                                                            <img class="rounded-circle" style="width:40px;height:40px;object-fit:cover;"
                                                                 src="getimages.php?image=<?php echo $row['image'];?>&type=<?php echo VIDEOGAMES;?>"
                                                                 alt="<?php echo $row['videogamename'];?>" title="<?php echo $row['videogamename'];?>">
                                                         </div>
-        
-                                                        <div class="ml-4">
-                                                            <div class="text-sm font-medium leading-5 text-gray-900"><?php echo $row['videogamename'];?>
+                                                        <div class="ms-3">
+                                                            <div class="fw-medium"><?php echo $row['videogamename'];?>
                                                             </div>
-                                                            <div class="text-sm leading-5 text-gray-500"><?php echo $row['maker'];?></div>
+                                                            <div class="text-muted small"><?php echo $row['maker'];?></div>
                                                         </div>
                                                     </div>
                                                 </td>
-        
-                                                <td
-                                                    class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                                <td>
                                                     <?php echo $row['price'];?></td>
-        
-                                                <td
-                                                    class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                                <td>
                                                     <?php echo date('d-m-Y',strtotime($row['dateadquisition']));?></td>
-                                                <td
-                                                    class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                    <a href="./viewvideogame.php?videogame=<?php echo $row['id']; ?>" class="text-indigo-600 hover:text-indigo-900">Ver</a>  
-        
-                                                <td
-                                                    class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                    <a href="./formvideogame.php?videogame=<?php echo $row['id']; ?>" class="text-indigo-600 hover:text-indigo-900">Editar</a></td>
-                                                <td
-                                                    class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                                    <a href="./videogames.php?delete=<?php echo $row['id']; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="text-red-600 hover:text-indigo-900" id="delete">Borrar</a></td>                                                    
+                                                <td class="text-end">
+                                                    <a href="./viewvideogame.php?videogame=<?php echo $row['id']; ?>" class="link-primary">Ver</a>  
+                                                </td>
+                                                <td class="text-end">
+                                                    <a href="./formvideogame.php?videogame=<?php echo $row['id']; ?>" class="link-primary">Editar</a>
+                                                </td>
+                                                <td class="text-end">
+                                                    <a href="./videogames.php?delete=<?php echo $row['id']; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="link-danger" id="delete">Borrar</a>
+                                                </td>                                                    
                                             </tr>
                                             <?php } 
                                             ?>
@@ -205,5 +193,6 @@ require_once "profile.php";
         </div>
     </div>
     <script type="application/javascript" src="./js/delete.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

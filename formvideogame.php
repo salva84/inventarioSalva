@@ -11,9 +11,9 @@ require_once "profile.php";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="./css/output.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+<body style="background: #edf2f7;">
     <div class="w-full">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <?php       
@@ -50,87 +50,73 @@ require_once "profile.php";
                 $_SESSION['nosearch'] = 0;
                 include_once "header.php"; ?>
                 <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-                    <div class="container px-6 py-8 mx-auto">
-                        <h3 class="text-3xl font-medium text-gray-700">Añadir videojuego</h3>
+                    <div class="container py-4">
+                        <h3 class="h3 text-secondary">Añadir videojuego</h3>
                         <div class="mt-8">
                         </div>
                         <div class="flex flex-col mt-8">
                             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                                 <div
                                     class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-300 shadow sm:rounded-lg">
-                                    <form class="w-full max-w-lg p-1" action="<?php echo $_SERVER["PHP_SELF"];?>?videogame=<?php echo isset($_GET['videogame']) ? $_GET['videogame']  : "";?>" enctype="multipart/form-data" method="POST">
+                                    <form class="w-100 p-2" action="<?php echo $_SERVER["PHP_SELF"];?>?videogame=<?php echo isset($_GET['videogame']) ? $_GET['videogame']  : "";?>" enctype="multipart/form-data" method="POST">
                                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                                        <div class="flex flex-wrap -mx-3 mb-6">
-                                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="videogamename">
-                                                Nombre
-                                            </label>
-                                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border <?php if (!empty($messages["videogamename"])) { echo "border-red-500"; } else { echo "border-gray-300 focus:border-gray-500"; }; ?> rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="videogamename" name="videogamename" value="<?php echo isset($row['videogamename']) ? $row['videogamename'] : "";?>" type="text" placeholder="Super Nintendo">
-                                            <p class="text-red-500 text-xs italic"><?php echo $messages['videogamename'] ?></p>
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                              <label class="form-label" for="videogamename">Nombre</label>
+                                              <input class="form-control <?php if (!empty($messages['videogamename'])) echo 'is-invalid'; ?>" id="videogamename" name="videogamename" value="<?php echo isset($row['videogamename']) ? $row['videogamename'] : "";?>" type="text" placeholder="The Legend of Zelda">
+                                              <div class="invalid-feedback"><?php echo $messages['videogamename'] ?></div>
                                             </div>
-                                            <div class="w-full md:w-1/3 px-3">
-                                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="price">
-                                                Precio adquisición
-                                            </label>
-                                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border <?php if (!empty($messages["price"])) { echo "border-red-500"; } else { echo "border-gray-300 focus:border-gray-500"; }; ?> rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="price" name="price" type="number" min="0" max="100000" value="<?php echo isset($row['price']) ? $row['price'] : "";?>" placeholder="10">
-                                            <p class="text-red-500 text-xs italic"><?php echo $messages['price'] ?></p>
+                                            <div class="col-md-4">
+                                              <label class="form-label" for="price">Precio adquisición</label>
+                                              <input class="form-control <?php if (!empty($messages['price'])) echo 'is-invalid'; ?>" id="price" name="price" type="number" min="0" max="100000" value="<?php echo isset($row['price']) ? $row['price'] : "";?>" placeholder="10">
+                                              <div class="invalid-feedback"><?php echo $messages['price'] ?></div>
                                             </div>
-                                            <div class="w-full md:w-1/3 px-3">
-                                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="maker">
-                                                Desarrollador
-                                            </label>
-                                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border <?php if (!empty($messages["maker"])) { echo "border-red-500"; } else { echo "border-gray-300 focus:border-gray-500"; }; ?> rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="maker" name="maker" value="<?php echo isset($row['maker']) ? $row['maker'] : "";?>" type="text" placeholder="Nintendo">
-                                            <p class="text-red-500 text-xs italic"><?php echo $messages['maker'] ?></p>
-                                            </div>                                            
+                                            <div class="col-md-4">
+                                              <label class="form-label" for="maker">Desarrollador</label>
+                                              <input class="form-control <?php if (!empty($messages['maker'])) echo 'is-invalid'; ?>" id="maker" name="maker" value="<?php echo isset($row['maker']) ? $row['maker'] : "";?>" type="text" placeholder="Nintendo">
+                                              <div class="invalid-feedback"><?php echo $messages['maker'] ?></div>
+                                            </div>
                                         </div>
-                                        <div class="flex flex-wrap -mx-3 mb-6">
-                                            <div class="w-full px-3">
+                                        <div class="row my-3">
+                                            <div class="col-12">
                                                 <?php include_once "imageinput.php"?>
                                             </div>
                                         </div>
-                                        <div class="flex flex-wrap -mx-3 mb-2">
-                                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="dateadquisition">
-                                                    Fecha adquisición
-                                                </label>
-                                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border <?php if (!empty($messages["dateadquisition"])) { echo "border-red-500"; } else { echo "border-gray-300 focus:border-gray-500"; }; ?> rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="dateadquisition" name="dateadquisition" value="<?php echo isset($row['dateadquisition']) ? date('Y-m-d',strtotime($row['dateadquisition'])) : "";?>" type="date" placeholder="">                                                
-                                                <p class="text-red-500 text-xs italic"><?php echo $messages["dateadquisition"]; ?></p>
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <label class="form-label" for="dateadquisition">Fecha adquisición</label>
+                                                <input class="form-control <?php if (!empty($messages['dateadquisition'])) echo 'is-invalid'; ?>" id="dateadquisition" name="dateadquisition" value="<?php echo isset($row['dateadquisition']) ? date('Y-m-d',strtotime($row['dateadquisition'])) : "";?>" type="date" placeholder="">                                                
+                                                <div class="invalid-feedback"><?php echo $messages['dateadquisition']; ?></div>
                                             </div>
-                                            <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
-                                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="comment">
-                                                    Comentarios
-                                                </label>
-                                                <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border <?php if (!empty($messages["comment"])) { echo "border-red-500"; } else { echo "border-gray-300 focus:border-gray-500"; }; ?> rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="comment" name="comment"  placeholder="Comentarios"><?php echo isset($row['comment']) ? $row['comment'] : ""; ?></textarea>
-                                                <p class="text-red-500 text-xs italic"><?php echo $messages["comment"]; ?></p>                                                
+                                            <div class="col-md-8">
+                                                <label class="form-label" for="comment">Comentarios</label>
+                                                <textarea class="form-control <?php if (!empty($messages['comment'])) echo 'is-invalid'; ?>" id="comment" name="comment"  placeholder="Comentarios"><?php echo isset($row['comment']) ? $row['comment'] : ""; ?></textarea>
+                                                <div class="invalid-feedback"><?php echo $messages['comment']; ?></div>
                                             </div>
                                         </div>
-                                        <div class="flex flex-wrap -mx-3 mb-2">
-                                            <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="consoleid">
-                                                    Consola
-                                                </label>
-                                                <select id="consoleid" name="consoleid" class="bg-gray-50 border <?php if (!empty($messages["consoleid"])) { echo "border-red-500"; } else { echo "border-gray-300 focus:border-gray-500"; }; ?> text-gray-900 text-sm rounded-lg focus:ring-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">    
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <label class="form-label" for="consoleid">Consola</label>
+                                                <select id="consoleid" name="consoleid" class="form-select <?php if (!empty($messages['consoleid'])) echo 'is-invalid'; ?>">    
                                                     <?php foreach ($consoles as $console) { $selectedConsole = isset($_POST['consoleid']) ? intval($_POST['consoleid']) : (isset($row['consoleid']) ? intval($row['consoleid']) : null); ?>
                                                         <option value="<?php echo htmlspecialchars($console['id']);?>" <?php if ($selectedConsole !== null && $selectedConsole == $console['id']) { echo "selected"; }?>><?php echo htmlspecialchars($console['consolename']); ?></option>
                                                     <?php } ?>
                                                 </select>                                               
-                                                <p class="text-red-500 text-xs italic"><?php echo $messages["consoleid"]; ?></p>
+                                                <div class="invalid-feedback"><?php echo $messages['consoleid']; ?></div>
                                             </div>
-                                            <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
-                                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="genreid">
-                                                    Género
-                                                </label>
-                                                <select id="genreid" name="genreid" class="bg-gray-50 border <?php if (!empty($messages["genreid"])) { echo "border-red-500"; } else { echo "border-gray-300 focus:border-gray-500"; }; ?> text-gray-900 text-sm rounded-lg focus:ring-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">    
+                                            <div class="col-md-8">
+                                                <label class="form-label" for="genreid">Género</label>
+                                                <select id="genreid" name="genreid" class="form-select <?php if (!empty($messages['genreid'])) echo 'is-invalid'; ?>">    
                                                     <?php foreach ($genres as $genre) { $selectedGenre = isset($_POST['genreid']) ? intval($_POST['genreid']) : (isset($row['genreid']) ? intval($row['genreid']) : null); ?>
                                                         <option value="<?php echo htmlspecialchars($genre['id']);?>" <?php if ($selectedGenre !== null && $selectedGenre == $genre['id']) { echo "selected"; }?>><?php echo htmlspecialchars($genre['genre']); ?></option>
                                                     <?php } ?>
                                                 </select>  
-                                                <p class="text-red-500 text-xs italic"><?php echo $messages["genreid"]; ?></p>                                                
+                                                <div class="invalid-feedback"><?php echo $messages['genreid']; ?></div>                                                
                                             </div>
                                         </div>                                        
                                         <?php if (isset($row['id'])) { ?><input type="hidden" name="videogameid" value="<?php echo $row['id']; ?>"><?php } ?>
-                                        <div class="flex items-center justify-between">
-                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                        <div class="d-flex justify-content-end mt-3">
+                                            <button class="btn btn-primary" type="submit">
                                             <?php if (isset($row['id'])) { ?>Actualizar<?php } else { ?>Añadir<?php } ?>
                                             </button>       
                                         </div>                                        
@@ -143,5 +129,6 @@ require_once "profile.php";
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
