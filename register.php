@@ -58,52 +58,49 @@ if (isset($_POST['sent'])) {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="./js/tailwind.js"></script>
-        <link href="./css/output.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
     <body>
-    <div class="w-screen flex mt-3 items-center justify-center">
-      <form class="bg-gray-400 shadow-md rounded px-8 pt-6 pb-8 mb-4"  method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
-        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-            Nombre de usuario
-          </label>
-          <input class="shadow appearance-none border <?php if (!empty($messages["username"])) echo "border-red-500"; ?> rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name="username" type="text" value="<?php if (!empty($_POST['username'])) echo $_POST['username'];?>" placeholder="Username">
-          <p class="text-red-500 text-xs italic"><?php echo $messages["username"]; ?></p>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-7 col-xl-6">
+          <div class="card shadow-sm">
+            <div class="card-body p-4">
+              <h1 class="h4 mb-3 text-center">Registro</h1>
+              <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                <div class="mb-3">
+                  <label for="username" class="form-label">Nombre de usuario</label>
+                  <input id="username" name="username" type="text" class="form-control <?php if (!empty($messages['username'])) echo 'is-invalid'; ?>" value="<?php if (!empty($_POST['username'])) echo $_POST['username'];?>" placeholder="Username">
+                  <div class="invalid-feedback"><?php echo $messages['username']; ?></div>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input id="password" name="password" type="password" class="form-control <?php if (!empty($messages['password'])) echo 'is-invalid'; ?>" placeholder="••••••••">
+                  <div class="invalid-feedback"><?php echo $messages['password']; ?></div>
+                </div>
+                <div class="mb-3">
+                  <label for="repassword" class="form-label">Repetir contraseña</label>
+                  <input id="repassword" name="repassword" type="password" class="form-control <?php if (!empty($messages['repassword'])) echo 'is-invalid'; ?>" placeholder="••••••••">
+                  <div class="invalid-feedback"><?php echo $messages['repassword']; ?></div>
+                </div>
+                <div class="mb-3">
+                  <label for="image" class="form-label">Retrato</label>
+                  <input id="image" name="image" type="file" class="form-control">
+                  <div class="form-text">PNG, JPG, JPEG (MAX.1000x1000px).</div>
+                  <div class="text-danger small"><?php echo $messages['image']; ?></div>
+                </div>
+                <input type="hidden" name="sent" value="1">
+                <div class="d-flex justify-content-end align-items-center">
+                  <button class="btn btn-primary" type="submit">Registro</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <p class="text-center text-muted mt-3 mb-0 small">&copy;<?php echo date('Y'); ?> Antonio Corp. All rights reserved.</p>
         </div>
-        <div class="mb-6">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-            Contraseña
-          </label>
-          <input class="shadow appearance-none border <?php if (!empty($messages["password"])) echo "border-red-500"; ?> rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type="password" placeholder="******************">
-          <p class="text-red-500 text-xs italic"><?php echo $messages["password"]; ?></p>
-        </div>
-        <div class="mb-6">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-            Repetir contraseña
-          </label>
-          <input class="shadow appearance-none border <?php if (!empty($messages["repassword"])) echo "border-red-500"; ?> rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="repassword" name="repassword" type="password" placeholder="******************">
-          <p class="text-red-500 text-xs italic"><?php echo $messages["repassword"]; ?></p>
-        </div>     
-        <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-            Retrato
-          </label>          
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="image" name="image" type="file">
-          <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG, JPG, JPEG (MAX.1000x1000px).</p>
-          <p class="text-red-500 text-xs italic"><?php echo $messages["image"]; ?></p>
-        </div>           
-        <input type="hidden" name="sent" value="1">
-        <div class="flex items-center justify-between">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-            Registro
-          </button>
-        </div>
-      </form>       
+      </div>
     </div>
-    <p class="text-center text-gray-500 text-xs">
-        &copy;<?php echo date('Y'); ?> Antonio Corp. All rights reserved.
-    </p>   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

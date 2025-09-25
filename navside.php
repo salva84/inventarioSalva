@@ -1,6 +1,6 @@
 <?php $highlight = $_SESSION['highlight']; ?>
-<nav class="mt-10">
-    <a class="flex items-center px-6 py-2 mt-4 <?php if ($highlight == CONSOLES) { ?> text-gray-100 bg-gray-700 bg-opacity-25 <?php } else { ?> text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 <?php } ?>" href="./consoles.php">
+<nav class="mt-3">
+    <a class="d-flex align-items-center px-3 py-2 mt-2 text-decoration-none <?php if ($highlight == CONSOLES) { ?> text-white bg-secondary <?php } else { ?> text-white-50 hover-bg-secondary <?php } ?>" href="./consoles.php">
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -9,10 +9,10 @@
                 d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
         </svg>
 
-        <span class="mx-3">Consolas</span>
+        <span class="ms-2">Consolas</span>
     </a>
 
-    <a class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
+    <a class="d-flex align-items-center px-3 py-2 mt-2 text-white-50 text-decoration-none"
         href="./videogames.php">
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
@@ -21,10 +21,10 @@
             </path>
         </svg>
 
-        <span class="mx-3">Videojuegos</span>
+        <span class="ms-2">Videojuegos</span>
     </a>
 
-    <a class="flex items-center px-6 py-2 mt-4 <?php if ($highlight == GENRES) { ?> text-gray-100 bg-gray-700 bg-opacity-25 <?php } else { ?> text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 <?php } ?>"
+    <a class="d-flex align-items-center px-3 py-2 mt-2 text-decoration-none <?php if ($highlight == GENRES) { ?> text-white bg-secondary <?php } else { ?> text-white-50 <?php } ?>"
         href="./genres.php">
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
@@ -33,10 +33,10 @@
             </path>
         </svg>
 
-        <span class="mx-3">Generos</span>
+        <span class="ms-2">Generos</span>
     </a>
     <?php if ($highlight !== GENRES) { ?>
-    <a class="flex items-center px-6 py-2 mt-4 <?php if ($highlight == FORM) { ?> text-gray-100 bg-gray-700 bg-opacity-25 <?php } else { ?> text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100 <?php } ?>"
+    <a class="d-flex align-items-center px-3 py-2 mt-2 text-decoration-none <?php if ($highlight == FORM) { ?> text-white bg-secondary <?php } else { ?> text-white-50 <?php } ?>"
         href="./<?php echo $_SESSION['urlform']; ?>">
         <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
@@ -45,7 +45,7 @@
             </path>
         </svg>
 
-        <span class="mx-3">Añadir <?php echo $_SESSION['tagform']; ?></span>
+        <span class="ms-2">Añadir <?php echo $_SESSION['tagform']; ?></span>
     </a>
     <?php } ?>
 </nav>

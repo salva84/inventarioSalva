@@ -11,19 +11,19 @@ require_once "profile.php";
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="./css/output.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body class="h-screen overflow-hidden flex items-center justify-center" style="background: #edf2f7;">
+<body style="background: #edf2f7;">
     <div class="w-full">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <?php 
             include_once "processconsoleslist.php";
             include_once "deleteconsole.php";
         ?>
-        <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
+        <div x-data="{ sidebarOpen: false }" class="d-flex min-vh-100 bg-light">
             <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden"></div>
         
-            <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform bg-gray-900 lg:translate-x-0 lg:static lg:inset-0">
+            <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="position-fixed top-0 start-0 z-3 vh-100 overflow-auto bg-dark text-white p-3" style="width:256px;">
                 <div class="flex items-center justify-center mt-8">
                     <div class="flex items-center">
                         <svg class="w-12 h-12" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,13 +39,13 @@ require_once "profile.php";
                 $_SESSION['tagform'] = $forms[CONSOLES][1];
                 include_once "navside.php"; ?>                
             </div>
-            <div class="flex flex-col flex-1 overflow-hidden">
+            <div class="flex-grow-1 ms-0 ms-lg-0" style="margin-left:256px;">
                 <?php 
                 $_SESSION['nosearch'] = 1;
                 include_once "header.php"; ?>
-                <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-                    <div class="container px-6 py-8 mx-auto">
-                        <h3 class="text-3xl font-medium text-gray-700">Inventario</h3>
+                <main class="bg-light">
+                    <div class="container py-4">
+                        <h3 class="h3 text-secondary">Inventario</h3>
         
                         <div class="mt-4">
                             <div class="flex flex-wrap -mx-6">
