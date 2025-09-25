@@ -44,7 +44,7 @@ require_once "profile.php";
                 $_SESSION['nosearch'] = 1;
                 include_once "header.php"; ?>
                 <main class="flex-grow-1 overflow-x-hidden overflow-y-auto" style="background-color:#e5e7eb;">
-                    <div class="container px-4 py-4">
+                    <div class="container py-4">
                         <h3 class="h3 text-secondary">Inventario</h3>
         
                         <div class="row g-3 mb-4">

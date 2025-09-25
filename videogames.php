@@ -44,7 +44,7 @@ require_once "profile.php";
                 $_SESSION['nosearch'] = 1;
                 include_once "header.php"; ?>
                 <main class="flex-grow-1 overflow-x-hidden overflow-y-auto" style="background-color:#e5e7eb;">
-                    <div class="container px-4 py-4">
+                    <div class="container py-4">
                         <h3 class="h3 text-secondary">Inventario</h3>
         
                         <div class="row g-3 mb-4">
@@ -127,60 +127,54 @@ require_once "profile.php";
         
                         </div>
         
-                        <div class="flex flex-col mt-8">
-                            <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-                                <div
-                                    class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                                    <table class="table table-hover align-middle">
-                                        <thead>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th>Precio</th>
-                                                <th>Fecha Adquisición</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Precio</th>
+                                        <th>Fecha Adquisición</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
         
-                                        <tbody class="bg-white">
-                                            <?php while ($row = $resultsVideogames->fetch_assoc()) {?>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="flex-shrink-0">
-                                                            <img class="rounded-circle" style="width:40px;height:40px;object-fit:cover;"
-                                                                src="getimages.php?image=<?php echo $row['image'];?>&type=<?php echo VIDEOGAMES;?>"
-                                                                alt="<?php echo $row['videogamename'];?>" title="<?php echo $row['videogamename'];?>">
-                                                        </div>
-                                                        <div class="ms-3">
-                                                            <div class="fw-medium"><?php echo $row['videogamename'];?>
-                                                            </div>
-                                                            <div class="text-muted small"><?php echo $row['maker'];?></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <?php echo $row['price'];?></td>
-                                                <td>
-                                                    <?php echo date('d-m-Y',strtotime($row['dateadquisition']));?></td>
-                                                <td class="text-end">
-                                                    <a href="./viewvideogame.php?videogame=<?php echo $row['id']; ?>" class="link-primary">Ver</a>  
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="./formvideogame.php?videogame=<?php echo $row['id']; ?>" class="link-primary">Editar</a>
-                                                </td>
-                                                <td class="text-end">
-                                                    <a href="./videogames.php?delete=<?php echo $row['id']; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="link-danger" id="delete">Borrar</a>
-                                                </td>                                                    
-                                            </tr>
-                                            <?php } 
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <?php include_once "pagination.php" ?>              
-                            </div>
+                                <tbody>
+                                    <?php while ($row = $resultsVideogames->fetch_assoc()) {?>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <img class="rounded-circle" style="width:40px;height:40px;object-fit:cover;"
+                                                        src="getimages.php?image=<?php echo $row['image'];?>&type=<?php echo VIDEOGAMES;?>"
+                                                        alt="<?php echo $row['videogamename'];?>" title="<?php echo $row['videogamename'];?>">
+                                                </div>
+                                                <div class="ms-3">
+                                                    <div class="fw-medium"><?php echo $row['videogamename'];?></div>
+                                                    <div class="text-muted small"><?php echo $row['maker'];?></div>
+                                                </div>
+                                            </div>
+                                        </td>
+        
+                                        <td><?php echo $row['price'];?></td>
+        
+                                        <td><?php echo date('d-m-Y',strtotime($row['dateadquisition']));?></td>
+                                        <td class="text-end">
+                                            <a href="./viewvideogame.php?videogame=<?php echo $row['id']; ?>" class="link-primary">Ver</a>  
+                                        </td>
+                                        <td class="text-end">
+                                            <a href="./formvideogame.php?videogame=<?php echo $row['id']; ?>" class="link-primary">Editar</a>
+                                        </td>
+                                        <td class="text-end">
+                                            <a href="./videogames.php?delete=<?php echo $row['id']; ?>&csrf_token=<?php echo $_SESSION['csrf_token']; ?>" class="link-danger" id="delete">Borrar</a>
+                                        </td>                                                    
+                                    </tr>
+                                    <?php } 
+                                    ?>
+                                </tbody>
+                            </table>
+                            <?php include_once "pagination.php" ?>              
                         </div>
                     </div>
                 </main>
