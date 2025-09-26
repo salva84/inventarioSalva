@@ -4,6 +4,22 @@ require_once "helpers.php";
 require_once "database.php";
 require_once "session.php";
 require_once "profile.php";
+// Bypass de autenticación y datos para desarrollo local
+if (isset($_GET['bypass']) && $_GET['bypass'] == 1) {
+    $countConsoles = 0;
+    $sumConsoles = 0;
+    $lastAdquisition = "N/A";
+    // Objeto con método fetch_assoc() que devuelve null para terminar el bucle while
+    $resultsConsoles = new class { public function fetch_assoc() { return null; } };
+    $totalPages = 1;
+    $currentPage = 1;
+    $next = 1;
+    $prev = 1;
+    $_SESSION['highlight'] = CONSOLES;
+    $_SESSION['urlform'] = $forms[CONSOLES][0];
+    $_SESSION['tagform'] = $forms[CONSOLES][1];
+    $_SESSION['nosearch'] = 1;
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -17,13 +33,15 @@ require_once "profile.php";
     <div class="w-100">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <?php 
-            include_once "processconsoleslist.php";
-            include_once "deleteconsole.php";
+            if (!(isset($_GET['bypass']) && $_GET['bypass'] == 1)) {
+                include_once "processconsoleslist.php";
+                include_once "deleteconsole.php";
+            }
         ?>
         <div x-data="{ sidebarOpen: false }" class="d-flex" style="height:100vh; background-color:#e5e7eb;">
             <div :class="sidebarOpen ? 'd-block' : 'd-none'" @click="sidebarOpen = false" class="position-fixed top-0 start-0 w-100 h-100" style="z-index:20; background-color:rgba(0,0,0,0.5);"></div>
         
-            <div :class="sidebarOpen ? 'translate-x-0' : 'translate-x-100'" class="position-fixed top-0 start-0 h-100 overflow-auto bg-dark text-white p-3" style="width:256px; z-index:30; transform: translateX(-100%); transition: transform 0.3s ease-out;">
+            <div :class="sidebarOpen ? 'translate-x-0' : 'translate-x-100'" class="position-fixed top-0 start-0 h-100 overflow-auto bg-dark text-white p-3" style="width:256px; z-index:30; transition: transform 0.3s ease-out;">
                 <div class="d-flex align-items-center justify-content-center mt-4">
                     <div class="d-flex align-items-center">
                         <svg style="width:48px;height:48px;" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,13 +62,13 @@ require_once "profile.php";
                 $_SESSION['nosearch'] = 1;
                 include_once "header.php"; ?>
                 <main class="flex-grow-1 overflow-x-hidden overflow-y-auto" style="background-color:#e5e7eb;">
-                    <div class="container px-4 py-4">
-                        <h3 class="h3 text-secondary">Inventario</h3>
+                    <div class="container" style="padding-left:1.5rem;padding-right:1.5rem;padding-top:2rem;padding-bottom:2rem;margin-left:auto;margin-right:auto;">
+                        <h3 style="font-size:1.875rem;line-height:2.25rem;font-weight:500;color:#374151;margin:0;">Inventario</h3>
         
                         <div class="mt-4">
-                            <div class="row g-3">
+                            <div class="row g-4">
                                 <div class="col-12 col-sm-6 col-xl-4">
-                                    <div class="d-flex align-items-center px-3 py-4 bg-white rounded shadow-sm">
+                                    <div class="d-flex align-items-center bg-white shadow-sm" style="padding-left:1.25rem;padding-right:1.25rem;padding-top:1.5rem;padding-bottom:1.5rem;border-radius:0.375rem;">
                                         <div class="p-3 rounded-circle me-3" style="background-color:#4f46e5; opacity:0.75;">
                                             <svg class="text-white" style="width:32px;height:32px;" viewBox="0 0 28 30" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -83,7 +101,7 @@ require_once "profile.php";
                                 </div>
         
                                 <div class="col-12 col-sm-6 col-xl-4">
-                                    <div class="d-flex align-items-center px-3 py-4 bg-white rounded shadow-sm">
+                                    <div class="d-flex align-items-center bg-white shadow-sm" style="padding-left:1.25rem;padding-right:1.25rem;padding-top:1.5rem;padding-bottom:1.5rem;border-radius:0.375rem;">
                                         <div class="p-3 rounded-circle me-3" style="background-color:#ea580c; opacity:0.75;">
                                             <svg class="text-white" style="width:32px;height:32px;" viewBox="0 0 28 28" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +125,7 @@ require_once "profile.php";
                                 </div>
         
                                 <div class="col-12 col-sm-6 col-xl-4">
-                                    <div class="d-flex align-items-center px-3 py-4 bg-white rounded shadow-sm">
+                                    <div class="d-flex align-items-center bg-white shadow-sm" style="padding-left:1.25rem;padding-right:1.25rem;padding-top:1.5rem;padding-bottom:1.5rem;border-radius:0.375rem;">
                                         <div class="p-3 rounded-circle me-3" style="background-color:#db2777; opacity:0.75;">
                                             <svg class="text-white" style="width:32px;height:32px;" viewBox="0 0 28 28" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -136,12 +154,12 @@ require_once "profile.php";
                             <table class="table table-hover align-middle">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Precio</th>
-                                        <th>Fecha Adquisición</th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
+                                        <th style="padding:0.75rem 1.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#6b7280;background-color:#F9FAFB;border-bottom:1px solid #e5e7eb;text-align:left;">Nombre</th>
+                                        <th style="padding:0.75rem 1.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#6b7280;background-color:#F9FAFB;border-bottom:1px solid #e5e7eb;text-align:left;">Precio</th>
+                                        <th style="padding:0.75rem 1.5rem;font-size:0.75rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#6b7280;background-color:#F9FAFB;border-bottom:1px solid #e5e7eb;text-align:left;">Fecha Adquisición</th>
+                                        <th style="padding:0.75rem 1.5rem;background-color:#F9FAFB;border-bottom:1px solid #e5e7eb;"></th>
+                                        <th style="padding:0.75rem 1.5rem;background-color:#F9FAFB;border-bottom:1px solid #e5e7eb;"></th>
+                                        <th style="padding:0.75rem 1.5rem;background-color:#F9FAFB;border-bottom:1px solid #e5e7eb;"></th>
                                     </tr>
                                 </thead>
         
