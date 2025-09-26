@@ -1,5 +1,6 @@
 <?php
 function filtering($input) {
+    if ($input === null) return '';
     $input = trim($input); // Elimina espacios antes y después de los datos
     $input = stripslashes($input); // Elimina backslashes \
     $input = htmlspecialchars($input, ENT_QUOTES, 'UTF-8');; // Traduce caracteres especiales en entidades HTML

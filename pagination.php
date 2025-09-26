@@ -1,5 +1,6 @@
 <?php 
-    if ($totalPages > 1) { 
+    if (isset($totalPages) && $totalPages > 1) { 
+        $currentPage = isset($currentPage) ? $currentPage : 1;
         $lastPage = ceil($currentPage/PAGESPERPAGINATION)*PAGESPERPAGINATION;
         $initPage = $lastPage - (PAGESPERPAGINATION-1);
     ?>

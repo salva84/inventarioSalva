@@ -3,7 +3,7 @@ require_once "opts.php";
 require_once "helpers.php";
 // Obtener el nombre de la imagen desde la URL, por ejemplo: imagen.php?file=miimagen.jpg
 $image = filteringImages($_GET['image']);
-$type = intval(filtering($_GET['type']));
+$type = isset($_GET['type']) ? intval(filtering($_GET['type'])) : 0;
 // Definir la ruta del directorio donde se almacenan las imágenes
 $dir = "/";
 if ($type == CONSOLES) {
@@ -17,6 +17,7 @@ if ($type == GENRES) {
 }
 // Crear la ruta completa
 $completeRoute = $route . $image;
+
 
 // Verificar si el archivo existe
 if (file_exists($completeRoute)) {
