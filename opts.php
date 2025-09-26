@@ -45,7 +45,7 @@ define('MINGENRELENGTH',3);
 $connectionData = [
     "host" => getenv('DB_HOST') ?: "localhost",
     "dbUser" => getenv('DB_USER') ?: "root", 
-    "dbPassword" => getenv('DB_PASSWORD') ?: "root",
+    "dbPassword" => getenv('DB_PASSWORD') ?: "",
     "db" => getenv('DB_NAME') ?: "inventory_new"
 ];
 $forms = [CONSOLES =>["formconsole.php","consola"],

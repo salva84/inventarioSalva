@@ -30,7 +30,7 @@ function getProfile($connection, $ownerId) {
 
 function setUser($connection, $username, $hash, $image) {
     $sql = "INSERT INTO users (username, hash, image) VALUES (?, ?, ?)";
-    executeInsert($connection, $sql, [$username, $hash, $image]);
+    return executeInsert($connection, $sql, [$username, $hash, $image]);
 }
 
 function setConsole($connection, $consoleName, $maker, $price, $image, $comment, $dateAdquisition, $ownerId) {
