@@ -1,0 +1,28 @@
+# Archivos de desarrollo local
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Archivos de PHP
+*.php~
+*.php.bak
+
+# Archivos de configuración local
+.env.local
+config.local.php
+
+# Archivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
