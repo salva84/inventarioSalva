@@ -1,4 +1,4 @@
-<header class="d-flex align-items-center justify-content-between px-3 py-3 bg-white border-bottom border-4 border-primary">
+<header class="d-flex align-items-center justify-content-between bg-white" style="padding-left:1.5rem;padding-right:1.5rem;padding-top:1rem;padding-bottom:1rem;border-bottom-width:4px;border-bottom-style:solid;border-bottom-color:#4f46e5;">
     <div class="d-flex align-items-center">
         <button @click="sidebarOpen = true" class="btn btn-outline-secondary d-lg-none">
             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,8 +9,8 @@
         <?php 
         if (isset($_SESSION['nosearch']) && $_SESSION['nosearch'] == 1) { ?>
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="get" class="ms-3">
-                <div class="position-relative">
-                    <button class="btn btn-link position-absolute top-0 start-0 ps-0" type="submit">
+                <div class="position-relative" style="margin-left:1rem;">
+                    <button class="btn btn-link position-absolute top-0 start-0 ps-0" type="submit" style="display:flex;align-items:center;height:100%;">
                         <svg class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none">
                             <path
                                 d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
@@ -19,7 +19,7 @@
                         </svg>
                     </button>
 
-                    <input class="form-control ps-5" style="width:16rem;" type="text"
+                    <input class="form-control ps-5" style="width:16rem;border-radius:0.375rem;" type="text"
                     id="search" name="search" value="<?php echo isset($_GET['search']) ? $_GET['search'] : ""; ?>" placeholder="Search">                
                 </div>
             </form>
@@ -40,7 +40,7 @@
 
             <div x-show="dropdownOpen"
                 class="position-absolute end-0 z-2 mt-2 bg-white rounded shadow"
-                style="display: none;">
+                style="display: none; width:12rem; overflow:hidden;">
                 <a href="#" class="dropdown-item px-3 py-2 d-block text-decoration-none">Profile</a>
                 <a href="#" class="dropdown-item px-3 py-2 d-block text-decoration-none">Products</a>
                 <a href="./logout.php" class="dropdown-item px-3 py-2 d-block text-decoration-none">Logout</a>
