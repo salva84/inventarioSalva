@@ -12,9 +12,9 @@ require_once "opts.php";
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">  
 </head>
-<body class="d-flex align-items-center justify-content-center min-vh-100">
+<body style="background: #edf2f7;" class="d-flex align-items-center justify-content-center min-vh-100">
     <?php include_once "processconsole.php"; ?>  
-    <div class="card shadow-sm" style="max-width:720px;">
+    <div class="card shadow-sm" style="max-width:720px;border-radius:0.5rem;">
         <img src="getimages.php?image=<?php echo $row['image'];?>&type=<?php echo CONSOLES;?>" alt="<?php echo $row['consolename'];?>" title="<?php echo $row['consolename'];?>" class="card-img-top" style="object-fit:cover;max-height:320px;">
         <div class="card-body">
             <div class="d-flex align-items-center">
