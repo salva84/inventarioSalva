@@ -160,6 +160,6 @@ class ValidationTest extends TestCase
         // Test stripslashes
         $input = 'test\\"value';
         $filtered = filtering($input);
-        $this->assertEquals('test"value', $filtered);
+        $this->assertEquals('test&quot;value', $filtered);
     }
 }

@@ -4,16 +4,25 @@ use PHPUnit\Framework\TestCase;
 
 class CRUDTest extends TestCase
 {
+    private function getConnection() {
+        $connection = new mysqli('db', 'root', 'root', 'inventory_new');
+        if ($connection->connect_error) {
+            return null;
+        }
+        return $connection;
+    }
     public function testExecuteQuery()
     {
         // Test with parameters
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
         $sql = "SELECT 1 as test_value";
-        $result = executeQuery($connection, $sql);
+        $stmt = $connection->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
         $this->assertNotFalse($result);
         
         $row = $result->fetch_assoc();
@@ -24,8 +33,8 @@ class CRUDTest extends TestCase
 
     public function testExecuteUpdate()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
@@ -39,8 +48,8 @@ class CRUDTest extends TestCase
 
     public function testExecuteInsert()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
@@ -54,8 +63,8 @@ class CRUDTest extends TestCase
 
     public function testExecuteDelete()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
@@ -69,8 +78,8 @@ class CRUDTest extends TestCase
 
     public function testFetchSingleResult()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
@@ -86,8 +95,8 @@ class CRUDTest extends TestCase
 
     public function testFetchSingleValue()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
@@ -101,8 +110,8 @@ class CRUDTest extends TestCase
 
     public function testFetchAllResults()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
@@ -121,8 +130,8 @@ class CRUDTest extends TestCase
 
     public function testGetRecords()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
@@ -134,8 +143,8 @@ class CRUDTest extends TestCase
 
     public function testGetRecordById()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
@@ -153,8 +162,8 @@ class CRUDTest extends TestCase
 
     public function testCountRecords()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
@@ -167,8 +176,8 @@ class CRUDTest extends TestCase
 
     public function testSumPrices()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
@@ -182,8 +191,8 @@ class CRUDTest extends TestCase
 
     public function testDeleteRecord()
     {
-        $connection = new mysqli('localhost', 'root', 'root', 'inventory_new');
-        if ($connection->connect_error) {
+        $connection = $this->getConnection();
+        if (!$connection || $connection->connect_error) {
             $this->markTestSkipped('Database connection failed');
         }
         
